@@ -4,7 +4,7 @@ from contextlib import closing
 DB_NAME = 'items.db'
 
 SCHEMA = """
-    CREATE TABLE IF NOT EXISTS incidents (
+    CREATE TABLE IF NOT EXISTS items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         item TEXT NOT NULL,
         description TEXT NOT NULL,
@@ -15,9 +15,9 @@ SCHEMA = """
 def init_db(db):
     db.execute(SCHEMA)
 
-def add_incident(db, item, description,rarity):
+def add_item(db, item, description,rarity):
     db.execute(
-        "INSERT INTO incidents (item, description,rarity) VALUES (?, ?,?)",
+        "INSERT INTO items (item, description,rarity) VALUES (?, ?,?)",
         (item, description,rarity),
     )
 
@@ -42,7 +42,7 @@ def main():
     with closing(sqlite3.connect(DB_NAME)) as db:
         with db:
             init_db(db)
-            add_incident(db, equipment, description,rarity)
+            add_item(db, equipment, description,rarity)
 
     print("запись добавлена")
 
