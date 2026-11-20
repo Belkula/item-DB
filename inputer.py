@@ -1,11 +1,4 @@
-import sqlite3
-from contextlib import closing
-
-def add_item(db, item, description,rarity):
-    db.execute(
-        "INSERT INTO items (item, description,rarity) VALUES (?, ?,?)",
-        (item, description,rarity),
-    )
+import DBdriver
 
 def input_item(DB_NAME):
     equipment = input("название предмета: ").strip()
@@ -24,10 +17,6 @@ def input_item(DB_NAME):
     if not equipment or not description:
         print("название и описание не должны быть пустыми")
         return
-
-    with closing(sqlite3.connect(DB_NAME)) as db:
-        with db:
-            init_db(db)
-            add_item(db, equipment, description,rarity)
+    DBdriver.insert_items(DB_NAME,equipment,description,rarity)
 
     print("запись добавлена")
