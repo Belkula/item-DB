@@ -7,7 +7,10 @@ def show_items(DB_NAME):
         cursor.execute("SELECT * FROM items")
         all_items = cursor.fetchall()
         print("Список предметов:")
-        for item in all_items:
-            print(f"ID:{item[0]}, Название: {item[1]}, Описание: {item[2]}")
+        if not all_items:
+            print("Предметов нет")
+        else:
+            for item in all_items:
+                print(f"ID:{item[0]}, Название: {item[1]}, Описание: {item[2]}, редкость: {item[3]}")
     finally:
         db.close()

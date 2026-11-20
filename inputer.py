@@ -1,18 +1,6 @@
 import sqlite3
 from contextlib import closing
 
-SCHEMA = """
-    CREATE TABLE IF NOT EXISTS items (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        item TEXT NOT NULL,
-        description TEXT NOT NULL,
-        rarity int NOT NULL DEFAULT 1
-    )
-"""
-
-def init_db(db):
-    db.execute(SCHEMA)
-
 def add_item(db, item, description,rarity):
     db.execute(
         "INSERT INTO items (item, description,rarity) VALUES (?, ?,?)",
