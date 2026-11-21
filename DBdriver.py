@@ -34,3 +34,17 @@ def get_list(db_name):
         )
         return cursor.fetchall()
 
+def find_item(item_id,db_name):
+    with closing(sqlite3.connect(db_name)) as db:
+        cursor = db.execute(
+            "SELECT * FROM items where id=?",(item_id,)
+        )
+        return cursor.fetchone()
+
+def change_item(target_ID,db_name,new_name,new_description,new_rarity):
+    with closing(sqlite3.connect(db_name)) as db:
+        with db:
+            db.execute(
+                "UPDATE items set item=?, description=?, rarity=? where id=?",(new_name, new_description,new_rarity,target_ID)
+            )
+        return()

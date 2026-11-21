@@ -1,4 +1,4 @@
-import inputer,reader,DBdriver
+import inputer,reader,editor,DBdriver
 
 DB_NAME = 'items.db'
 
@@ -8,6 +8,7 @@ def main():
         print("Нажмите соответствующую цифру чтобы выйти")
         print("добавить новый предмет(1)")
         print("посмотреть список предметов(2)")
+        print("Изменить предмет в БД(3)")
         print("выйти(0)")
         target = input("Что вы хотите сделать?").strip()
         match target:
@@ -15,6 +16,8 @@ def main():
                 inputer.input_item(DB_NAME)
             case "2":
                 reader.show_items(DB_NAME)
+            case "3":
+                editor.edit_item(DB_NAME)
             case "0":
                 print("спасибо за внимание")
                 return
